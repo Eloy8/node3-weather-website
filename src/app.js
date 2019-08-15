@@ -39,7 +39,7 @@ app.get('/help', (req, res) => {
   res.render('help', {
     title: 'Help',
     name: 'Eloy',
-    message: 'You fucked up!'
+    message: 'ERROR: The magic smoke escaped!'
   })
 })
 

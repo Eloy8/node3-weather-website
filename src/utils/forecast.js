@@ -6,7 +6,7 @@ const forecast = (latitude, longitude, callback) => {
 
   request({ url, json: true }, (error, response) => {
     const { error:bodyError, code} = response.body
-    const { summary } = response.body.daily.data[0]
+    const { summary, temperatureLow, temperatureHigh } = response.body.daily.data[0]
     const { temperature, precipIntensity } = response.body.currently
 
     if (error) {
@@ -14,7 +14,10 @@ const forecast = (latitude, longitude, callback) => {
     } else if (bodyError) {
         callback(code + ': ' + bodyError, undefined)
     } else {
-      callback(undefined, summary + ' It is currently ' + temperature + ' Celcius out. There is a ' + precipIntensity + '% chance of rain.')
+      callback(undefined,
+        summary + ' It is currently ' + temperature + ' Celcius out.' +
+        'There is a ' + precipIntensity + '% chance of rain.' +
+        'The temperature will be between ' + temperatureLow + ' and ' + temperatureHigh + ' °C!')
       }
   })
 }
